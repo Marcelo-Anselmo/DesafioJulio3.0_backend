@@ -1,10 +1,15 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const { connectToMongo } = require("./database/connect");
+
+const PORT = process.env.PORT || 3001;
+const apiKEY = process.env.API_KEY; 
+
+connectToMongo();
 
 const app = express();
 app.use(express.json());
-const port = 3000;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // You can specify the allowed origins here
@@ -23,7 +28,7 @@ app.enable("trust proxy");
 
 app.get("/", async (req, res,) => {
     try{
-    const response = await axios.get('https://newsapi.org/v2/top-headlines?country=br&apiKey=4243c5c96183494eb32c13dce32a0864');
+    const response = await axios.get(apiKEY);
     const data = response.data;
     res.json(data);
     } catch (error) {
@@ -32,6 +37,6 @@ app.get("/", async (req, res,) => {
 }
 });
 
-app.listen(port);
+app.listen(PORT);
 
 module.exports = { app };
