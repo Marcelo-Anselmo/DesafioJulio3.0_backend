@@ -1,10 +1,13 @@
 const express = require('express');
+const { Router } = require("express");
 const axios = require('axios');
+const router = Router();
+const userRouter = Router();
 const cors = require('cors');
 const { connectToMongo } = require("./database/connect");
 
 const PORT = process.env.PORT || 3001;
-const apiKEY = process.env.API_KEY; 
+const apiKEY = process.env.API_KEY;
 
 connectToMongo();
 
@@ -36,6 +39,13 @@ app.get("/", async (req, res,) => {
   res.status(500).json({ error: 'Erro ao consumir a API externa' });
 }
 });
+
+app.get("/", (req, res) => {
+  res.send({ working: true });
+});
+
+// app.use("/users", userRouter);
+// app.use("/auth", authRouter);
 
 app.listen(PORT);
 
