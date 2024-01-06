@@ -40,10 +40,6 @@ app.get("/", async (req, res,) => {
 }
 });
 
-app.get("/", (req, res) => {
-  res.send({ working: true });
-});
-
 //Private Route
 app.get("/user/:id", checkToken, async (req, res) => {
 
@@ -79,8 +75,6 @@ function checkToken(req, res, next){
   }catch(error){
     res.status(400).json({ msg: 'Token inválido!' })
   }
-
-
 }
 
 // Resgister User
