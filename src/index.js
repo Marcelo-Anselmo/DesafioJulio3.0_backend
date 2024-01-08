@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { connectToMongo } = require("./database/connect");
